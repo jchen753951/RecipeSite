@@ -1,0 +1,85 @@
+.homepage {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .hero {
+    background-image: url("https://via.placeholder.com/1200x600"); /* Replace with a food-themed image */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 50px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-button {
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cta-button:hover {
+    background-color: #ff4500;
+  }
+  
+  .ingredient-section {
+    padding: 30px 20px;
+  }
+  
+  .ingredient-input {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .find-recipes-button {
+    background-color: #32cd32; /* LimeGreen */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .find-recipes-button:hover {
+    background-color: #228b22;
+  }
+  
+  .featured-section {
+    padding: 30px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .featured-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .featured-section li {
+    margin: 10px 0;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+  }
+  
