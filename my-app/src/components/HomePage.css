@@ -1,85 +1,185 @@
 .homepage {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .hero {
-    background-image: url("https://via.placeholder.com/1200x600"); /* Replace with a food-themed image */
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 50px 20px;
-  }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-  }
-  
-  .hero p {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .cta-button {
-    background-color: #ff6347; /* Tomato color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cta-button:hover {
-    background-color: #ff4500;
-  }
-  
-  .ingredient-section {
-    padding: 30px 20px;
-  }
-  
-  .ingredient-input {
-    width: 60%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .find-recipes-button {
-    background-color: #32cd32; /* LimeGreen */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .find-recipes-button:hover {
-    background-color: #228b22;
-  }
-  
-  .featured-section {
-    padding: 30px 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .featured-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .featured-section li {
-    margin: 10px 0;
-  }
-  
-  .footer {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-  }
-  
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.hero {
+  background-image: url("https://via.placeholder.com/1200x600"); /* Replace with a food-themed image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 50px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #ff6347; /* Tomato color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #ff4500;
+}
+
+.ingredient-section {
+  padding: 30px 20px;
+}
+
+.ingredient-input {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.find-recipes-button {
+  background-color: #32cd32; /* LimeGreen */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.find-recipes-button:hover {
+  background-color: #228b22;
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 5px auto;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  text-align: left;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+.featured-section {
+  padding: 30px 20px;
+  background-color: #f9f9f9;
+}
+
+.featured-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.featured-section li {
+  margin: 10px 0;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.input-with-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 10px;
+  gap: 8px;
+  background-color: #fff;
+  max-width: 600px;
+  margin: 0 auto; /* Center the input field */
+}
+
+.ingredient-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 6px 8px;
+  font-size: 1rem;
+  min-width: 120px;
+  background-color: transparent;
+}
+
+.ingredient-input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.tag {
+  background-color: #e0f7fa; /* Light teal */
+  color: #00796b; /* Dark teal */
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+.remove-tag-button {
+  background: none;
+  border: none;
+  color: #004d40;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.remove-tag-button:hover {
+  color: #00796b;
+}
+
+.suggestions-list {
+  margin-top: 5px;
+  list-style: none;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  max-width: 600px;
+  margin: 0 auto; /* Align suggestions with input */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.suggestion-item:hover {
+  background-color: #f1f1f1;
+}
