@@ -1,4 +1,3 @@
-//Spoonacular API Key: 36fcabd0f6c1474289e471ce05bacdf7
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 
@@ -8,6 +7,7 @@ const HomePage = () => {
   const [suggestions, setSuggestions] = useState([]); // Filtered suggestions
   const [debouncedInput, setDebouncedInput] = useState(""); // Debounced input value
   const [recipes, setRecipes] = useState([]); // Fetched recipes
+  const [selectedRecipe, setSelectedRecipe] = useState(null); // Selected recipe for detailed view
 
   const API_KEY = "36fcabd0f6c1474289e471ce05bacdf7"; // Replace with your Spoonacular API key
 
@@ -48,12 +48,26 @@ const HomePage = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setRecipes(data); // Update the recipes state
+          setRecipes(data); // Update the recipes state with basic information
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
         });
     }
+  };
+
+  // Fetch detailed recipe information by ID
+  const fetchRecipeDetails = (recipeId) => {
+    fetch(
+      `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectedRecipe(data); // Update selected recipe with detailed information
+      })
+      .catch((error) => {
+        console.error("Error fetching recipe details:", error);
+      });
   };
 
   // Add tag
@@ -132,32 +146,47 @@ const HomePage = () => {
         </button>
       </div>
 
-      {/* Recipes Section */}
-      {recipes.length > 0 && (
+      {/* Recipe List Section */}
+      {recipes.length > 0 && !selectedRecipe && (
         <div className="recipes-section">
           <h2>Recipes Found:</h2>
           <ul className="recipes-list">
-            {recipes.map((recipe, index) => (
-              <li key={index} className="recipe-item">
+            {recipes.map((recipe) => (
+              <li
+                key={recipe.id}
+                className="recipe-item"
+                onClick={() => fetchRecipeDetails(recipe.id)}
+              >
                 <img
                   src={recipe.image}
                   alt={recipe.title}
                   className="recipe-image"
                 />
-                <h3>
-                  <a
-                    href={`https://spoonacular.com/recipes/${recipe.title
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}-${recipe.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {recipe.title}
-                  </a>
-                </h3>
+                <h3>{recipe.title}</h3>
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* Recipe Details Section */}
+      {selectedRecipe && (
+        <div className="recipe-details-section">
+          <button onClick={() => setSelectedRecipe(null)}>Back to Results</button>
+          <h2>{selectedRecipe.title}</h2>
+          <img
+            src={selectedRecipe.image}
+            alt={selectedRecipe.title}
+            className="recipe-image"
+          />
+          <h3>Ingredients:</h3>
+          <ul>
+            {selectedRecipe.extendedIngredients.map((ingredient, idx) => (
+              <li key={idx}>{ingredient.name}</li>
+            ))}
+          </ul>
+          <h3>Instructions:</h3>
+          <p>{selectedRecipe.instructions}</p>
         </div>
       )}
 
