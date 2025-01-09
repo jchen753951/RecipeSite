@@ -1,37 +1,58 @@
-import React, { useState } from "react";
+//Spoonacular API Key: 36fcabd0f6c1474289e471ce05bacdf7
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 
 const HomePage = () => {
   const [tags, setTags] = useState([]); // Array of selected ingredients
   const [inputValue, setInputValue] = useState(""); // Current input value
   const [suggestions, setSuggestions] = useState([]); // Filtered suggestions
+  const [debouncedInput, setDebouncedInput] = useState(""); // Debounced input value
+  const [recipes, setRecipes] = useState([]); // Fetched recipes
 
-  const ingredientList = [
-    "Eggs",
-    "Tomatoes",
-    "Cheese",
-    "Milk",
-    "Chicken",
-    "Onions",
-    "Garlic",
-    "Potatoes",
-    "Pepper",
-    "Carrots",
-  ]; // List of suggested ingredients
+  const API_KEY = "36fcabd0f6c1474289e471ce05bacdf7"; // Replace with your Spoonacular API key
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
+  // Debounce the input value
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedInput(inputValue);
+    }, 300); // Adjust the delay as needed (e.g., 300ms)
 
-    // Filter suggestions based on input
-    if (value) {
-      const filtered = ingredientList.filter((ingredient) =>
-        ingredient.toLowerCase().startsWith(value.toLowerCase())
-      );
-      setSuggestions(filtered);
+    return () => clearTimeout(timer); // Cleanup the timer on input change
+  }, [inputValue]);
+
+  // Fetch ingredient suggestions based on the debounced input
+  useEffect(() => {
+    if (debouncedInput.trim()) {
+      fetch(
+        `https://api.spoonacular.com/food/ingredients/autocomplete?query=${debouncedInput}&number=10&apiKey=${API_KEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const ingredientNames = data.map((item) => item.name);
+          setSuggestions(ingredientNames);
+        })
+        .catch((error) => {
+          console.error("Error fetching ingredient suggestions:", error);
+        });
     } else {
-      setSuggestions([]);
+      setSuggestions([]); // Clear suggestions when input is empty
+    }
+  }, [debouncedInput]);
+
+  // Fetch recipes based on selected ingredients
+  const fetchRecipes = () => {
+    if (tags.length > 0) {
+      const ingredientString = tags.join(",");
+      fetch(
+        `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientString}&number=5&apiKey=${API_KEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setRecipes(data); // Update the recipes state
+        })
+        .catch((error) => {
+          console.error("Error fetching recipes:", error);
+        });
     }
   };
 
@@ -86,7 +107,7 @@ const HomePage = () => {
             className="ingredient-input"
             placeholder="Type to add an ingredient"
             value={inputValue}
-            onChange={handleInputChange}
+            onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
           />
         </div>
@@ -106,8 +127,39 @@ const HomePage = () => {
           </ul>
         )}
 
-        <button className="find-recipes-button">Find Recipes</button>
+        <button className="find-recipes-button" onClick={fetchRecipes}>
+          Find Recipes
+        </button>
       </div>
+
+      {/* Recipes Section */}
+      {recipes.length > 0 && (
+        <div className="recipes-section">
+          <h2>Recipes Found:</h2>
+          <ul className="recipes-list">
+            {recipes.map((recipe, index) => (
+              <li key={index} className="recipe-item">
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className="recipe-image"
+                />
+                <h3>
+                  <a
+                    href={`https://spoonacular.com/recipes/${recipe.title
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}-${recipe.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {recipe.title}
+                  </a>
+                </h3>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Featured Section */}
       <div className="featured-section">
