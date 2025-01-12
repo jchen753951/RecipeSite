@@ -70,6 +70,14 @@ const HomePage = () => {
       });
   };
 
+  // Sanitize and format instructions
+  const sanitizeInstructions = (instructions) => {
+    if (!instructions) return "No instructions provided.";
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(instructions, "text/html");
+    return doc.body.textContent || "No instructions available.";
+  };
+
   // Add tag
   const addTag = (tag) => {
     if (!tags.includes(tag)) {
@@ -172,31 +180,41 @@ const HomePage = () => {
       {/* Recipe Details Section */}
       {selectedRecipe && (
         <div className="recipe-details-section">
-          <button onClick={() => setSelectedRecipe(null)}>Back to Results</button>
-          <h2>{selectedRecipe.title}</h2>
+          <button className="back-button" onClick={() => setSelectedRecipe(null)}>
+            ← Back to Results
+          </button>
+          <h2 className="recipe-title">{selectedRecipe.title}</h2>
           <img
             src={selectedRecipe.image}
             alt={selectedRecipe.title}
-            className="recipe-image"
+            className="recipe-image-large"
           />
-          <h3>Ingredients:</h3>
-          <ul>
-            {selectedRecipe.extendedIngredients.map((ingredient, idx) => (
-              <li key={idx}>{ingredient.name}</li>
-            ))}
-          </ul>
-          <h3>Instructions:</h3>
-          <p>{selectedRecipe.instructions}</p>
+          <div className="recipe-details">
+            <div className="ingredients-section">
+              <h3>Ingredients</h3>
+              <ul className="ingredients-list">
+                {selectedRecipe.extendedIngredients.map((ingredient, idx) => (
+                  <li key={idx}>{ingredient.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="instructions-section">
+              <h3>Instructions</h3>
+              <p className="instructions-text">
+                {sanitizeInstructions(selectedRecipe.instructions)}
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Featured Section */}
-      <div className="featured-section">
+      <div className="featured-section">*/
         <h2>Why Use Recipe Finder?</h2>
         <ul>
-          <li>Find recipes tailored to your ingredients</li>
-          <li>Save your favorite recipes</li>
-          <li>Quick and easy to use</li>
+        <ul>Find recipes tailored to your ingredients</ul>
+        <ul>Save your favorite recipes</ul>
+        <ul>Quick and easy to use</ul>
         </ul>
       </div>
 
