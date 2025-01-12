@@ -209,11 +209,11 @@ const HomePage = () => {
       )}
 
       {/* Featured Section */}
-      <div className="featured-section">*/
+      <div className="featured-section">
         <h2>Why Use Recipe Finder?</h2>
         <ul>
         <ul>Find recipes tailored to your ingredients</ul>
-        <ul>Save your favorite recipes</ul>
+        <ul>Save your favorite recipes</ul>+
         <ul>Quick and easy to use</ul>
         </ul>
       </div>
