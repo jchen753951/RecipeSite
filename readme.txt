@@ -8,8 +8,12 @@ Detailed Recipe View: Includes ingredients, instructions, and images for each re
 Dark Mode Toggle: Seamlessly switch between light and dark themes.
 
 Tech Stack
-Frontend: React, CSS
-API Integration: Spoonacular API
+Frontend Framework: React (functional components, hooks)
+Styling: Custom CSS (responsive design, light/dark mode)
+API Integration: Spoonacular API (ingredient autocomplete, recipe details)
+State Management: React useState, useEffect
+Performance Enhancements: Debounced API calls for efficient querying
+Version Control: Git/GitHub for source code management
 
 Getting Started
 Clone the repository.
