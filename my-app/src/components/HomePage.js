@@ -9,7 +9,7 @@ const HomePage = () => {
   const [recipes, setRecipes] = useState([]); // Fetched recipes
   const [selectedRecipe, setSelectedRecipe] = useState(null); // Selected recipe for detailed view
 
-  const API_KEY = "36fcabd0f6c1474289e471ce05bacdf7"; // Replace with your Spoonacular API key
+  const API_KEY = ""; // Replace with your Spoonacular API key
 
   // Debounce the input value
   useEffect(() => {
