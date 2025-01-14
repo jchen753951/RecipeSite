@@ -1,3 +1,22 @@
+Recipe Finder App
+A sleek and interactive recipe discovery app that allows users to find delicious recipes based on the ingredients they have at home. Built with React, it leverages the Spoonacular API for real-time recipe suggestions and detailed cooking instructions.
+
+Features
+Ingredient-Based Recipe Search: Enter ingredients, get tailored recipes.
+Dynamic Autocomplete: Smart ingredient suggestions as you type.
+Detailed Recipe View: Includes ingredients, instructions, and images for each recipe.
+Dark Mode Toggle: Seamlessly switch between light and dark themes.
+
+Tech Stack
+Frontend: React, CSS
+API Integration: Spoonacular API
+
+Getting Started
+Clone the repository.
+Add your Spoonacular API key in the Homepage.js in components folder.
+Run npm install to install dependencies.
+Start the app with npm start.
+
 Issues with React Dom 19. Reverting to 18 until compatible. 
 npm uninstall react react-dom
 npm install react@18 react-dom@18
